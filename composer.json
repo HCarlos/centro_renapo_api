@@ -63,7 +63,20 @@
             "@php artisan package:discover --ansi"
         ],
         "post-update-cmd": [
-            "@php artisan vendor:publish --tag=laravel-assets --ansi --force"
+            "@php artisan vendor:publish --tag=laravel-assets --ansi --force",
+            "@php artisan config:cache",
+            "@php artisan cache:clear",
+            "@php artisan config:clear",
+            "@php artisan view:clear",
+            "@php artisan route:clear",
+            "@php artisan route:clear"
+        ],
+        "post-install-cmd": [
+            "@php artisan config:cache",
+            "@php artisan cache:clear",
+            "@php artisan config:clear",
+            "@php artisan view:clear",
+            "@php artisan route:clear"
         ],
         "post-root-package-install": [
             "@php -r \"file_exists('.env') || copy('.env.example', '.env');\""
@@ -76,6 +89,7 @@
         "pre-package-uninstall": [
             "Illuminate\\Foundation\\ComposerScripts::prePackageUninstall"
         ]
+
     },
     "extra": {
         "laravel": {
@@ -89,7 +103,8 @@
         "allow-plugins": {
             "pestphp/pest-plugin": true,
             "php-http/discovery": true
-        }
+        },
+        "platform-check": false
     },
     "minimum-stability": "stable",
     "prefer-stable": true

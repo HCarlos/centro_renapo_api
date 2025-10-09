@@ -31,11 +31,8 @@ class User extends Authenticatable{
 
     protected $casts = [
         'password' => 'hashed',
+        'curp_verified_at' => 'datetime',
     ];
-
-    public function searches(){
-        return $this->hasMany(Search::class);
-    }
 
     public function consultas(){
         return $this->hasMany(Consulta::class);
