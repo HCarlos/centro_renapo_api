@@ -84,20 +84,19 @@ class ConsultaController extends Controller{
                 ]);
             }
 
-            return response()->json($respuestaJson);
+//            return response()->json($respuestaJson);
 
-//            return response()->json([
-//                'success' => $httpCode >= 200 && $httpCode < 300,
-//                'http_code' => $httpCode,
-//                'data' => $respuestaJson,
-//                'message' => $httpCode >= 200 && $httpCode < 300 ? 'Registro exitoso' : 'Error en registro externo'
-//            ], $httpCode);
-
-
+            return redirect()->route('home')->with([
+                'success' => 'Consulta realizada correctamente',
+                'consulta_reciente' => $consulta
+            ]);
 
         } catch (\Exception $e) {
             Log::error('Error en consulta por datos: ' . $e->getMessage());
-            return response()->json(['error' => 'Error en la consulta'], 500);
+
+            return redirect()->back()->with([
+                'error' => 'Error en la consulta: ' . $e->getMessage()
+            ]);
         }
 
     }
@@ -158,11 +157,19 @@ class ConsultaController extends Controller{
                 ]);
             }
 
-            return response()->json($respuestaJson);
+//            return response()->json($respuestaJson);
+
+            return redirect()->route('home')->with([
+                'success' => 'Consulta realizada correctamente',
+                'consulta_reciente' => $consulta
+            ]);
 
         } catch (\Exception $e) {
-            Log::error('Error en consulta por CURP: ' . $e->getMessage());
-            return response()->json(['error' => 'Error en la consulta'], 500);
+            Log::error('Error en consulta por datos: ' . $e->getMessage());
+
+            return redirect()->back()->with([
+                'error' => 'Error en la consulta: ' . $e->getMessage()
+            ]);
         }
     }
 
