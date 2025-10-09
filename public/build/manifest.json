@@ -128,7 +128,7 @@
     ]
   },
   "resources/js/Pages/Home.vue": {
-    "file": "assets/Home-CikOLr-y.js",
+    "file": "assets/Home-BTInspr1.js",
     "name": "Home",
     "src": "resources/js/Pages/Home.vue",
     "isDynamicEntry": true,
@@ -137,7 +137,7 @@
       "__plugin-vue_export-helper-DlAUqK2U.js"
     ],
     "css": [
-      "assets/Home-CqrkHuqD.css"
+      "assets/Home-DELNuMe2.css"
     ]
   },
   "resources/js/Pages/Profile/Edit.vue": {
@@ -206,7 +206,7 @@
     ]
   },
   "resources/js/app.js": {
-    "file": "assets/app-CDd9ymB3.js",
+    "file": "assets/app-DZglgjZ6.js",
     "name": "app",
     "src": "resources/js/app.js",
     "isEntry": true,
@@ -230,7 +230,7 @@
       "resources/js/Pages/Welcome.vue"
     ],
     "css": [
-      "assets/app-dXyJTCIw.css"
+      "assets/app-CJl_oUf0.css"
     ]
   }
 }

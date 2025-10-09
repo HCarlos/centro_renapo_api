@@ -38,30 +38,59 @@
                             </button>
                         </div>
 
-                        <!-- Menú de usuario dropdown -->
-                        <!-- En el dropdown menu del usuario -->
-                        <div v-if="userMenuOpen"
-                             class="origin-top-right absolute right-0 mt-2 w-48 rounded-md shadow-lg py-1 bg-white ring-1 ring-black ring-opacity-5 focus:outline-none z-50 animate-fade-in">
-                            <div class="px-4 py-2 text-xs text-gray-500 border-b">
-                                Conectado como<br>
-                                <span class="font-medium text-gray-700">{{ userName }}</span>
+                        <!-- Menú de usuario dropdown - CORREGIDO -->
+                        <div class="ml-3 relative" ref="userMenu">
+                            <div>
+                                <button @click="toggleUserMenu"
+                                        class="max-w-xs flex items-center text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-all duration-200 hover:bg-gray-100 px-2 py-1"
+                                        id="user-menu-button">
+                                    <div class="h-8 w-8 rounded-full bg-gradient-to-r from-purple-500 to-pink-500 flex items-center justify-center text-white font-semibold text-sm shadow-sm">
+                                        {{ userInitials }}
+                                    </div>
+                                    <span class="hidden md:block ml-2 text-gray-700 font-medium">{{ userName }}</span>
+                                    <svg class="ml-1 h-4 w-4 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/>
+                                    </svg>
+                                </button>
                             </div>
-                            <Link :href="route('profile.edit')"
-                                  class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors duration-150">
-                                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
-                                </svg>
-                                Mi Perfil
-                            </Link>
-                            <button @click="logout"
-                                    class="flex items-center w-full px-4 py-2 text-sm text-red-600 hover:bg-red-50 transition-colors duration-150">
-                                <svg class="w-4 h-4 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/>
-                                </svg>
-                                Cerrar Sesión
-                            </button>
-                        </div>
 
+                            <!-- Dropdown menu -->
+                            <transition
+                                enter-active-class="transition ease-out duration-100"
+                                enter-from-class="transform opacity-0 scale-95"
+                                enter-to-class="transform opacity-100 scale-100"
+                                leave-active-class="transition ease-in duration-75"
+                                leave-from-class="transform opacity-100 scale-100"
+                                leave-to-class="transform opacity-0 scale-95"
+                            >
+                                <div v-show="userMenuOpen"
+                                     class="origin-top-right absolute right-0 mt-2 w-56 rounded-lg shadow-lg bg-white ring-1 ring-black ring-opacity-5 focus:outline-none z-50 divide-y divide-gray-100">
+                                    <div class="px-4 py-3">
+                                        <p class="text-sm text-gray-900 font-medium">{{ userName }}</p>
+                                        <p class="text-sm text-gray-500 truncate">{{ page.props.auth.user.curp }}</p>
+                                    </div>
+                                    <div class="py-1">
+                                        <Link :href="route('profile.edit')"
+                                              class="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 transition-colors duration-150 w-full text-left"
+                                              @click="userMenuOpen = false">
+                                            <svg class="w-4 h-4 mr-3 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
+                                            </svg>
+                                            Mi Perfil
+                                        </Link>
+                                    </div>
+                                    <div class="py-1">
+                                        <button @click="logout"
+                                                class="flex items-center w-full px-4 py-2 text-sm text-red-600 hover:bg-red-50 transition-colors duration-150 text-left">
+                                            <svg class="w-4 h-4 mr-3 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 16l4-4m0 0l-4-4m4 4H7m6 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h4a3 3 0 013 3v1"/>
+                                            </svg>
+                                            Cerrar Sesión
+                                        </button>
+                                    </div>
+                                </div>
+                            </transition>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -253,7 +282,6 @@ import { ref, computed, onMounted, onUnmounted } from 'vue'
 import SearchByDataModal from '../Components/SearchByDataModal.vue'
 import SearchByCurpModal from '../Components/SearchByCurpModal.vue'
 
-// Usar usePage() para acceder a las propiedades de la página
 const page = usePage()
 
 const props = defineProps({
@@ -263,8 +291,10 @@ const props = defineProps({
 
 const modalByData = ref(false)
 const modalByCurp = ref(false)
-const userMenuOpen = ref(true)
+const userMenuOpen = ref(false)
+const userMenu = ref(null)
 
+// Computed properties para los mensajes flash
 const flashSuccess = computed(() => {
     return page.props.flash?.success
 })
@@ -273,6 +303,7 @@ const flashError = computed(() => {
     return page.props.flash?.error
 })
 
+// Computed para obtener las iniciales del usuario
 const userInitials = computed(() => {
     const userName = page.props.auth?.user?.name || 'Usuario'
     return userName
@@ -287,12 +318,14 @@ const userName = computed(() => {
     return page.props.auth?.user?.name || 'Usuario'
 })
 
+// Métodos
 const openModal = (type) => {
     if (type === 'byData') {
         modalByData.value = true
     } else if (type === 'byCurp') {
         modalByCurp.value = true
     }
+    // Cerrar menú de usuario si está abierto
     userMenuOpen.value = false
 }
 
@@ -310,19 +343,19 @@ const logout = () => {
 }
 
 // Cerrar menú de usuario al hacer clic fuera
-const closeUserMenu = (event) => {
-    if (!event.target.closest('#user-menu-button')) {
+const handleClickOutside = (event) => {
+    if (userMenu.value && !userMenu.value.contains(event.target)) {
         userMenuOpen.value = false
     }
 }
 
 // Agregar event listener para cerrar el menú al hacer clic fuera
 onMounted(() => {
-    document.addEventListener('click', closeUserMenu)
+    document.addEventListener('click', handleClickOutside)
 })
 
 onUnmounted(() => {
-    document.removeEventListener('click', closeUserMenu)
+    document.removeEventListener('click', handleClickOutside)
 })
 </script>
 

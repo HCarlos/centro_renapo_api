@@ -1,9 +1,9 @@
 <?php return array(
     'root' => array(
         'name' => 'laravel/laravel',
-        'pretty_version' => '1.0.0+no-version-set',
-        'version' => '1.0.0.0',
-        'reference' => NULL,
+        'pretty_version' => 'dev-main',
+        'version' => 'dev-main',
+        'reference' => '2820f70eeef9e967c2917ae95b5fb0333b355e3f',
         'type' => 'project',
         'install_path' => __DIR__ . '/../../',
         'aliases' => array(),
@@ -43,6 +43,15 @@
             'reference' => '18ba5ddfec8976260ead6e866180bd5d2f71aa1d',
             'type' => 'library',
             'install_path' => __DIR__ . '/../carbonphp/carbon-doctrine-types',
+            'aliases' => array(),
+            'dev_requirement' => false,
+        ),
+        'codezero/browser-locale' => array(
+            'pretty_version' => '3.4.0',
+            'version' => '3.4.0.0',
+            'reference' => 'dd6c50e5557b06b57960df6db7f52e85ef683e5e',
+            'type' => 'library',
+            'install_path' => __DIR__ . '/../codezero/browser-locale',
             'aliases' => array(),
             'dev_requirement' => false,
         ),
@@ -626,9 +635,9 @@
             'dev_requirement' => false,
         ),
         'laravel-lang/routes' => array(
-            'pretty_version' => '1.9.1',
-            'version' => '1.9.1.0',
-            'reference' => 'ed87d81fff3b79048abcb533e0f39a52bc030ffb',
+            'pretty_version' => '1.10.0',
+            'version' => '1.10.0.0',
+            'reference' => 'c34b739551029470d1ecd5e560084f6c049c0d7f',
             'type' => 'library',
             'install_path' => __DIR__ . '/../laravel-lang/routes',
             'aliases' => array(),
@@ -662,9 +671,9 @@
             'dev_requirement' => false,
         ),
         'laravel/laravel' => array(
-            'pretty_version' => '1.0.0+no-version-set',
-            'version' => '1.0.0.0',
-            'reference' => NULL,
+            'pretty_version' => 'dev-main',
+            'version' => 'dev-main',
+            'reference' => '2820f70eeef9e967c2917ae95b5fb0333b355e3f',
             'type' => 'project',
             'install_path' => __DIR__ . '/../../',
             'aliases' => array(),
@@ -1216,6 +1225,17 @@
             'replaced' => array(
                 0 => '4.9.1',
             ),
+        ),
+        'roave/security-advisories' => array(
+            'pretty_version' => 'dev-latest',
+            'version' => 'dev-latest',
+            'reference' => '2f36d3ba6e5978b7443db44d1bfb9e63053e316b',
+            'type' => 'metapackage',
+            'install_path' => NULL,
+            'aliases' => array(
+                0 => '9999999-dev',
+            ),
+            'dev_requirement' => true,
         ),
         'sebastian/cli-parser' => array(
             'pretty_version' => '4.2.0',

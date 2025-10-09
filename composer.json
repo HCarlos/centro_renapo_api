@@ -18,6 +18,8 @@
         "tightenco/ziggy": "^2.6"
     },
     "require-dev": {
+        "roave/security-advisories": "dev-latest"
+        ,
         "fakerphp/faker": "^1.23",
         "laravel-lang/lang": "^15.26",
         "laravel/breeze": "^2.3",

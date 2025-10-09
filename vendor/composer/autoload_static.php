@@ -224,6 +224,7 @@ class ComposerStaticInitc514d8f7b9fc5970bdd94287905ef584
             'Composer\\Semver\\' => 16,
             'Composer\\Pcre\\' => 14,
             'Composer\\ClassMapGenerator\\' => 27,
+            'CodeZero\\BrowserLocale\\' => 23,
             'Carbon\\Doctrine\\' => 16,
             'Carbon\\' => 7,
         ),
@@ -735,6 +736,10 @@ class ComposerStaticInitc514d8f7b9fc5970bdd94287905ef584
         array (
             0 => __DIR__ . '/..' . '/composer/class-map-generator/src',
         ),
+        'CodeZero\\BrowserLocale\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/codezero/browser-locale/src',
+        ),
         'Carbon\\Doctrine\\' => 
         array (
             0 => __DIR__ . '/..' . '/carbonphp/carbon-doctrine-types/src/Carbon/Doctrine',
@@ -776,6 +781,7 @@ class ComposerStaticInitc514d8f7b9fc5970bdd94287905ef584
         'App\\Http\\Middleware\\Cors' => __DIR__ . '/../..' . '/app/Http/Middleware/Cors.php',
         'App\\Http\\Middleware\\HandleInertiaRequests' => __DIR__ . '/../..' . '/app/Http/Middleware/HandleInertiaRequests.php',
         'App\\Http\\Requests\\Auth\\LoginRequest' => __DIR__ . '/../..' . '/app/Http/Requests/Auth/LoginRequest.php',
+        'App\\Http\\Requests\\PasswordUpdateRequest' => __DIR__ . '/../..' . '/app/Http/Requests/PasswordUpdateRequest.php',
         'App\\Http\\Requests\\ProfileUpdateRequest' => __DIR__ . '/../..' . '/app/Http/Requests/ProfileUpdateRequest.php',
         'App\\Models\\Consulta' => __DIR__ . '/../..' . '/app/Models/Consulta.php',
         'App\\Models\\Search' => __DIR__ . '/../..' . '/app/Models/Search.php',
@@ -902,6 +908,16 @@ class ComposerStaticInitc514d8f7b9fc5970bdd94287905ef584
         'Carbon\\Unit' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/Unit.php',
         'Carbon\\WeekDay' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/WeekDay.php',
         'Carbon\\WrapperClock' => __DIR__ . '/..' . '/nesbot/carbon/src/Carbon/WrapperClock.php',
+        'CodeZero\\BrowserLocale\\BrowserLocale' => __DIR__ . '/..' . '/codezero/browser-locale/src/BrowserLocale.php',
+        'CodeZero\\BrowserLocale\\Filters\\CombinedFilter' => __DIR__ . '/..' . '/codezero/browser-locale/src/Filters/CombinedFilter.php',
+        'CodeZero\\BrowserLocale\\Filters\\CountryFilter' => __DIR__ . '/..' . '/codezero/browser-locale/src/Filters/CountryFilter.php',
+        'CodeZero\\BrowserLocale\\Filters\\Filter' => __DIR__ . '/..' . '/codezero/browser-locale/src/Filters/Filter.php',
+        'CodeZero\\BrowserLocale\\Filters\\LanguageFilter' => __DIR__ . '/..' . '/codezero/browser-locale/src/Filters/LanguageFilter.php',
+        'CodeZero\\BrowserLocale\\Filters\\LocaleFilter' => __DIR__ . '/..' . '/codezero/browser-locale/src/Filters/LocaleFilter.php',
+        'CodeZero\\BrowserLocale\\Filters\\PropertyFilter' => __DIR__ . '/..' . '/codezero/browser-locale/src/Filters/PropertyFilter.php',
+        'CodeZero\\BrowserLocale\\Filters\\WeightFilter' => __DIR__ . '/..' . '/codezero/browser-locale/src/Filters/WeightFilter.php',
+        'CodeZero\\BrowserLocale\\Laravel\\BrowserLocaleServiceProvider' => __DIR__ . '/..' . '/codezero/browser-locale/src/Laravel/BrowserLocaleServiceProvider.php',
+        'CodeZero\\BrowserLocale\\Locale' => __DIR__ . '/..' . '/codezero/browser-locale/src/Locale.php',
         'Composer\\ClassMapGenerator\\ClassMap' => __DIR__ . '/..' . '/composer/class-map-generator/src/ClassMap.php',
         'Composer\\ClassMapGenerator\\ClassMapGenerator' => __DIR__ . '/..' . '/composer/class-map-generator/src/ClassMapGenerator.php',
         'Composer\\ClassMapGenerator\\FileList' => __DIR__ . '/..' . '/composer/class-map-generator/src/FileList.php',
