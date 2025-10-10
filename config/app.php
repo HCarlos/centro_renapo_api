@@ -52,7 +52,10 @@ return [
     |
     */
 
-    'url' => env('APP_URL', 'http://localhost'),
+//    'url' => env('APP_URL', 'http://localhost'),
+    'url' => env('APP_URL', 'https://curp.villahermosa.gob.mx'),
+
+    'asset_url' => env('ASSET_URL', 'https://curp.villahermosa.gob.mx'),
 
     /*
     |--------------------------------------------------------------------------

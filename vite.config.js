@@ -35,7 +35,7 @@ export default defineConfig({
         watch: {
             usePolling: true,
         },
-        cors: true, // Habilita CORS para el servidor de desarrollo de Vite
+        cors: true,
     },
     optimizeDeps: {
         include: [],
@@ -51,5 +51,5 @@ export default defineConfig({
                 }
             }
         }
-    }
+    },
 });
