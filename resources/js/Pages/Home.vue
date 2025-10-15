@@ -1,3 +1,87 @@
+<script setup>
+import { Link, router, usePage } from '@inertiajs/vue3'
+import { ref, computed, onMounted, onUnmounted } from 'vue'
+import SearchByDataModal from '../Components/SearchByDataModal.vue'
+import SearchByCurpModal from '../Components/SearchByCurpModal.vue'
+
+const page = usePage()
+
+const props = defineProps({
+    consultas: Array,
+    consulta_reciente: Object
+})
+
+const modalByData = ref(false)
+const modalByCurp = ref(false)
+const userMenuOpen = ref(false)
+const userMenu = ref(null)
+
+// Computed properties para los mensajes flash
+const flashSuccess = computed(() => {
+    return page.props.flash?.success
+})
+
+const flashError = computed(() => {
+    return page.props.flash?.error
+})
+
+// Computed para obtener las iniciales del usuario
+const userInitials = computed(() => {
+    const userName = page.props.auth?.user?.name || 'Usuario'
+    return userName
+        .split(' ')
+        .map(word => word.charAt(0))
+        .join('')
+        .toUpperCase()
+        .substring(0, 2)
+})
+
+const userName = computed(() => {
+    return page.props.auth?.user?.name || 'Usuario'
+})
+
+// Métodos
+const openModal = (type) => {
+    if (type === 'byData') {
+        modalByData.value = true
+    } else if (type === 'byCurp') {
+        modalByCurp.value = true
+    }
+    // Cerrar menú de usuario si está abierto
+    userMenuOpen.value = false
+}
+
+const closeModal = () => {
+    modalByData.value = false
+    modalByCurp.value = false
+}
+
+const toggleUserMenu = () => {
+    userMenuOpen.value = !userMenuOpen.value
+}
+
+const logout = () => {
+    router.post(route('logout'))
+}
+
+// Cerrar menú de usuario al hacer clic fuera
+const handleClickOutside = (event) => {
+    if (userMenu.value && !userMenu.value.contains(event.target)) {
+        userMenuOpen.value = false
+    }
+}
+
+// Agregar event listener para cerrar el menú al hacer clic fuera
+onMounted(() => {
+    document.addEventListener('click', handleClickOutside)
+})
+
+onUnmounted(() => {
+    document.removeEventListener('click', handleClickOutside)
+})
+</script>
+
+
 <template>
     <div class="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50">
         <!-- Navbar Superior -->
@@ -276,88 +360,8 @@
     </div>
 </template>
 
-<script setup>
-import { Link, router, usePage } from '@inertiajs/vue3'
-import { ref, computed, onMounted, onUnmounted } from 'vue'
-import SearchByDataModal from '../Components/SearchByDataModal.vue'
-import SearchByCurpModal from '../Components/SearchByCurpModal.vue'
 
-const page = usePage()
 
-const props = defineProps({
-    consultas: Array,
-    consulta_reciente: Object
-})
-
-const modalByData = ref(false)
-const modalByCurp = ref(false)
-const userMenuOpen = ref(false)
-const userMenu = ref(null)
-
-// Computed properties para los mensajes flash
-const flashSuccess = computed(() => {
-    return page.props.flash?.success
-})
-
-const flashError = computed(() => {
-    return page.props.flash?.error
-})
-
-// Computed para obtener las iniciales del usuario
-const userInitials = computed(() => {
-    const userName = page.props.auth?.user?.name || 'Usuario'
-    return userName
-        .split(' ')
-        .map(word => word.charAt(0))
-        .join('')
-        .toUpperCase()
-        .substring(0, 2)
-})
-
-const userName = computed(() => {
-    return page.props.auth?.user?.name || 'Usuario'
-})
-
-// Métodos
-const openModal = (type) => {
-    if (type === 'byData') {
-        modalByData.value = true
-    } else if (type === 'byCurp') {
-        modalByCurp.value = true
-    }
-    // Cerrar menú de usuario si está abierto
-    userMenuOpen.value = false
-}
-
-const closeModal = () => {
-    modalByData.value = false
-    modalByCurp.value = false
-}
-
-const toggleUserMenu = () => {
-    userMenuOpen.value = !userMenuOpen.value
-}
-
-const logout = () => {
-    router.post(route('logout'))
-}
-
-// Cerrar menú de usuario al hacer clic fuera
-const handleClickOutside = (event) => {
-    if (userMenu.value && !userMenu.value.contains(event.target)) {
-        userMenuOpen.value = false
-    }
-}
-
-// Agregar event listener para cerrar el menú al hacer clic fuera
-onMounted(() => {
-    document.addEventListener('click', handleClickOutside)
-})
-
-onUnmounted(() => {
-    document.removeEventListener('click', handleClickOutside)
-})
-</script>
 
 <style scoped>
 /* Animación personalizada para el fade-in */

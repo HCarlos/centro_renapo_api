@@ -17,8 +17,16 @@ const submit = () => {
 
 <template>
     <div class="min-h-screen bg-gradient-to-br from-blue-500 to-purple-600 flex items-center justify-center">
+
         <div class="bg-white p-8 rounded-lg shadow-lg max-w-md w-full">
-            <h1 class="text-2xl font-bold text-gray-800 mb-6">Iniciar Sesión</h1>
+
+            <div class="flex items-center justify-between mb-6">
+                <span class="text-xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
+                    RENAPO Query
+                </span>
+                <h1 class="text-2xl font-bold text-gray-800">Iniciar Sesión</h1>
+            </div>
+
             <form @submit.prevent="submit">
                 <div class="mb-4">
                     <label for="curp" class="block text-gray-700 text-sm font-bold mb-2">CURP</label>
