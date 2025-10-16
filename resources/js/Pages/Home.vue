@@ -101,7 +101,6 @@ onUnmounted(() => {
                             </span>
                         </div>
                     </div>
-
                     <!-- Menú de usuario -->
                     <div class="flex items-center">
                         <!-- Botones de búsqueda en desktop -->

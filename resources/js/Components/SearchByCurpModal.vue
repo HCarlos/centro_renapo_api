@@ -35,6 +35,7 @@ const close = () => {
     form.reset()
     emit('close')
 }
+
 </script>
 
 <template>

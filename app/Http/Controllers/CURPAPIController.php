@@ -3,13 +3,14 @@
 namespace App\Http\Controllers;
 
 use App\Models\Consulta;
-use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
+use Exception;
+use Illuminate\Support\Facades\Validator;
 use RuntimeException;
 
-class ConsultaController extends Controller{
+class CURPAPIController extends Controller{
 
     private $apiBaseUrl = "https://dcurp.tabasco.gob.mx/";
     private $token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc1ODkxODYzMywianRpIjoiZmIyMTkyMTctYzFmYS00MTNlLThjY2MtNmI1OWM1ODE5NzY5IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6IkNhcmxvc0ZyYW5jaXNjb1JleWVzMiIsIm5iZiI6MTc1ODkxODYzMywiY3NyZiI6IjdjMjJmNTZkLWE4YjUtNDllOC04ZTUwLWI4ZDI5MWVjNDIxNyIsImV4cCI6MTc5MDQ1NDYzM30.uNJb1u_HeIvRpdo1k14IwtxjhDn9kwcHNajJl0OTQfk";
@@ -17,7 +18,7 @@ class ConsultaController extends Controller{
 
     public function consultaPorDatos(Request $request){
 
-        $request->validate([
+        $validator = Validator::make($request->all(), [
             'nombre' => 'required|string|max:255',
             'apellido_paterno' => 'required|string|max:255',
             'apellido_materno' => 'required|string|max:255',
@@ -26,13 +27,13 @@ class ConsultaController extends Controller{
             'clave_estado' => 'required|string|size:2'
         ]);
 
-//        if ($validator->fails()) {
-//            return response()->json([
-//                'nombre' => false,
-//                'message' => 'Error de validación',
-//                'errors' => $validator->errors()
-//            ], 422);
-//        }
+        if ($validator->fails()) {
+            return response()->json([
+                'nombre' => false,
+                'message' => 'Error de validación',
+                'errors' => $validator->errors()
+            ], 422);
+        }
 
         try {
             $urlExterna = $this->apiBaseUrl.'consulta-datos';
@@ -73,21 +74,17 @@ class ConsultaController extends Controller{
             // Decodificar respuesta
             $respuestaJson = json_decode($respuesta, true);
 
-            if ($respuestaJson !== null) {
-                $consulta = Consulta::create([
-                    'user_id' => Auth::id(),
-                    'tipo' => 'datos',
-                    'datos_consulta' => $request->all(),
-                    'resultado' => $respuestaJson
-                ]);
-            }
+//            if ($respuestaJson !== null) {
+//                $consulta = Consulta::create([
+//                    'user_id' => Auth::id(),
+//                    'tipo' => 'datos',
+//                    'datos_consulta' => $request->all(),
+//                    'resultado' => $respuestaJson
+//                ]);
+//            }
 
-//            return response()->json($respuestaJson);
+            return response()->json($respuestaJson);
 
-            return redirect()->route('home')->with([
-                'success' => 'Consulta realizada correctamente',
-                'consulta_reciente' => $consulta
-            ]);
 
         } catch (\Exception $e) {
             Log::error('Error en consulta por datos: ' . $e->getMessage());
@@ -110,8 +107,6 @@ class ConsultaController extends Controller{
 
             $urlExterna = $this->apiBaseUrl.'consulta-curp';
 
-//            dd($urlExterna);
-
             $datos = [
                 'curp'           => $request->curp,
             ];
@@ -132,35 +127,26 @@ class ConsultaController extends Controller{
             $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
             $error = curl_error($ch);
 
-//            dd($error);
-
-
-
             curl_close($ch);
 
             if ($error) {
-                throw new Exception("Error en conexión cURL: " . $error);
+                throw new \RuntimeException("Error en conexión cURL: " . $error);
             }
 
 
             $respuestaJson = json_decode($respuesta, true);
 
 
-            if ($respuestaJson !== null){
-                $consulta = Consulta::create([
-                    'user_id' => Auth::id(),
-                    'tipo' => 'curp',
-                    'datos_consulta' => $request->all(),
-                    'resultado' => $respuestaJson
-                ]);
-            }
+//            if ($respuestaJson !== null){
+//                $consulta = Consulta::create([
+//                    'user_id' => Auth::id(),
+//                    'tipo' => 'curp',
+//                    'datos_consulta' => $request->all(),
+//                    'resultado' => $respuestaJson
+//                ]);
+//            }
 
-//            return response()->json($respuestaJson);
-
-            return redirect()->route('home')->with([
-                'success' => 'Consulta realizada correctamente',
-                'consulta_reciente' => $consulta
-            ]);
+            return response()->json($respuestaJson);
 
         } catch (\Exception $e) {
             Log::error('Error en consulta por datos: ' . $e->getMessage());
@@ -176,5 +162,7 @@ class ConsultaController extends Controller{
         $estados = json_decode(file_get_contents(public_path('js/estados.json')), true);
         return $estados[$clave] ?? 'Desconocido';
     }
+
+
 
 }
