@@ -9,7 +9,7 @@ use RuntimeException;
 
 class CURPAPIController extends Controller{
 
-    private $apiBaseUrl = "https://dcurp.tabasco.gob.mx/";
+    private $apiBaseUrl = "https://curp.tabasco.gob.mx/";
 
 //    private $token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTc1ODkxODYzMywianRpIjoiZmIyMTkyMTctYzFmYS00MTNlLThjY2MtNmI1OWM1ODE5NzY5IiwidHlwZSI6ImFjY2VzcyIsInN1YiI6IkNhcmxvc0ZyYW5jaXNjb1JleWVzMiIsIm5iZiI6MTc1ODkxODYzMywiY3NyZiI6IjdjMjJmNTZkLWE4YjUtNDllOC04ZTUwLWI4ZDI5MWVjNDIxNyIsImV4cCI6MTc5MDQ1NDYzM30.uNJb1u_HeIvRpdo1k14IwtxjhDn9kwcHNajJl0OTQfk";
 //    private $token = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJmcmVzaCI6ZmFsc2UsImlhdCI6MTczNzY2MDk0MiwianRpIjoiMDViMGVhYTAtNDY0ZS00MzQ2LWIwNTMtNjUxY2MyZTZiYWZmIiwidHlwZSI6ImFjY2VzcyIsInN1YiI6IkFsYmVydG9BbG9uc29QZXJlejgiLCJuYmYiOjE3Mzc2NjA5NDIsImNzcmYiOiI1ZjEzYjg5My0zZGM3LTQxZGYtYWZlMy01NTA1ZDllM2FkNzMiLCJleHAiOjE3NjkxOTY5NDJ9.6082Z3gGfDfYigC7_WSnVQAWFlUGb95LoF8tTJgefjg";
