@@ -19,8 +19,8 @@ return Application::configure(basePath: dirname(__DIR__))
     )
     ->withMiddleware(function (Middleware $middleware): void {
         $middleware->api(prepend: [
-//            EnsureFrontendRequestsAreStateful::class,
-//            HandleCors::class, // Middleware CORS nativo
+            EnsureFrontendRequestsAreStateful::class,
+            HandleCors::class, // Middleware CORS nativo
         ]);
         $middleware->web(append: [
             HandleInertiaRequests::class,

@@ -44,16 +44,12 @@ class AuthController extends Controller
 
     public function login_api(Request $request){
 
-//        dd($request);
-
         $request->validate([
             'curp' => 'required',
             'password' => 'required',
         ]);
 
         $user = User::where('curp', $request->curp)->first();
-
-//        dd($user);
 
         if (!$user || !Hash::check($request->password, $user->password)) {
             throw ValidationException::withMessages([

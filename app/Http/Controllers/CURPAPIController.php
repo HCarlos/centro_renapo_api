@@ -2,11 +2,8 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Consulta;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
-use Exception;
 use Illuminate\Support\Facades\Validator;
 use RuntimeException;
 
@@ -18,11 +15,12 @@ class CURPAPIController extends Controller{
 
     public function consultaPorDatos(Request $request){
 
+
         $validator = Validator::make($request->all(), [
             'nombre' => 'required|string|max:255',
             'apellido_paterno' => 'required|string|max:255',
             'apellido_materno' => 'required|string|max:255',
-            'fecha_nacimiento' => 'required|date',
+            'fecha_nacimiento' => 'required',
             'sexo' => 'required|in:H,M',
             'clave_estado' => 'required|string|size:2'
         ]);
@@ -35,20 +33,26 @@ class CURPAPIController extends Controller{
             ], 422);
         }
 
+
         try {
             $urlExterna = $this->apiBaseUrl.'consulta-datos';
 
-            $fn = explode("-",$request->fecha_nacimiento);
+
+            $fn = explode("/",$request->fecha_nacimiento);
             $fecha_nac = $fn[2]."/".$fn[1]."/".$fn[0];
+
+//            dd($fecha_nac);
 
             $datos = [
                 'nombre'           => strtoupper($request->nombre),
                 'apellido_paterno' => strtoupper($request->apellido_paterno),
                 'apellido_materno' => strtoupper($request->apellido_materno),
                 'sexo'             => strtoupper($request->sexo),
-                'fecha_nacimiento' => $fecha_nac,
+                'fecha_nacimiento' => $request->fecha_nacimiento,
                 'clave_estado'     => strtoupper($request->clave_estado)
             ];
+
+//            dd($datos);
 
             $ch = curl_init();
             curl_setopt($ch, CURLOPT_URL, $urlExterna);
